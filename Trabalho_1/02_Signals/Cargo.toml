@@ -1,0 +1,15 @@
+[package]
+name = "sd_t1_signals"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "sender"
+path = "src/sender.rs"
+
+[[bin]]
+name = "receiver"
+path = "src/receiver.rs"
+
+[dependencies]
+nix = "0.24.1"
