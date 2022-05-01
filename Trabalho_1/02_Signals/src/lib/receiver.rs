@@ -1,6 +1,5 @@
 use std::process::exit;
-use std::sync::Mutex;
-use nix::sys::signal::{self as sigmod, Signal, SigHandler};
+use nix::sys::signal::{self as sigmod, Signal, SigHandler, SigSet};
 use nix::libc::c_int;
 
 /// Handles received signals
@@ -10,7 +9,7 @@ extern fn signal_handler(signal: c_int) {
     let signal = Signal::try_from(signal).unwrap();
     let _ = match signal {
         Signal::SIGTERM => {
-            println!("SIGTERM signal received!");
+            println!("SIGTERM signal received! Exiting...");
             exit(0);
         },
         Signal::SIGUSR1 => {
@@ -46,6 +45,6 @@ pub fn busy_wait() {
 /// Starts a blocking wait on the process, to maintain it active during signal listening
 pub fn blocking_wait() {
     let _handler = set_signal_handler();
-    let mutex = Mutex::new(-1);
-    mutex.lock();
+    let sigset = SigSet::empty();
+    _ = sigset.wait();
 }
