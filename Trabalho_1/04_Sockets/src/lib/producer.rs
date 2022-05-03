@@ -48,5 +48,18 @@ pub fn run(address: String, values: i32) {
         random_counter += 1;
     }
 
+    println!("Iteration has ended: sending '0'...\n");
+
+    let data = (0 as i64).to_be_bytes();
+        
+    stream.flush().unwrap();
+    
+    let _w = match stream.write(&data) {
+        Ok(value) => value,
+        Err(error) => panic!("Unable to write into socket: {:?}", error),
+    };
+
+    println!("Finished!");
+
     stream.shutdown(Shutdown::Both).unwrap();
 }

@@ -18,6 +18,7 @@ fn handler(mut stream: &TcpStream) -> bool {
     let x: i64 = i64::from_be_bytes(buffer);
 
     if x == 0 {
+        println!("Received '0': Stoping consumer...\n");
         return false;
     }
 
@@ -62,6 +63,8 @@ pub fn run(address: String) {
             break;
         }
     }
+
+    println!("Finished!");
 
     stream.shutdown(Shutdown::Both).unwrap();
     exit(0);
