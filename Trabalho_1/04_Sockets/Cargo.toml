@@ -1,8 +1,13 @@
 [package]
 name = "sd_t1_sockets"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "sockets"
+path = "src/main.rs"
 
 [dependencies]
+clap = "3.1.12"
+rand = "0.8.5"
+dotenv = "0.15.0"
