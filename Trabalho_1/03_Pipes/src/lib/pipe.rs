@@ -2,6 +2,10 @@ use nix::libc;
 use nix::unistd::{fork, ForkResult, pipe, close, read, write};
 use rand::{thread_rng, Rng};
 
+/// Checks whether a number is prime.
+/// 
+/// ## Arguments
+/// * `x` - Number to check primeness.
 fn is_prime(x: i64) -> bool {
     let last = (x as f64).sqrt() as i64 + 1;
     x > 1 && (2..last).all(|d| x % d != 0)
