@@ -14,17 +14,10 @@ fn main() {
             error
         ),
     };
-    let producer_address: String = match dotenv::var("PRODUCER_ADDRESS") {
+    let binding_address: String = match dotenv::var("BINDING_ADDRESS") {
         Ok(value) => value,
         Err(error) => panic!(
-            "Couldn't read PRODUCER_ADDRESS binding configuration: {:?}",
-            error
-        ),
-    };
-    let consumer_address: String = match dotenv::var("CONSUMER_ADDRESS") {
-        Ok(value) => value,
-        Err(error) => panic!(
-            "Couldn't read CONSUMER_ADDRESS binding configuration: {:?}",
+            "Couldn't read BINDING_ADDRESS binding configuration: {:?}",
             error
         ),
     };
@@ -56,9 +49,9 @@ fn main() {
     if matches.is_present("producer") {
         let args: Vec<&str> = matches.values_of("producer").unwrap().collect();
         println!("📤 Producer Program 📤");
-        producer::run(producer_address, FromStr::from_str(args[0]).unwrap());
+        producer::run(binding_address, FromStr::from_str(args[0]).unwrap());
     } else {
         println!("📤 Consumer Program 📤");
-        consumer::run(consumer_address);
+        consumer::run(binding_address);
     }
 }
