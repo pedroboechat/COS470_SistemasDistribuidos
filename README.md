@@ -2,13 +2,12 @@
 
 Repositório contendo os trabalhos realizados na disciplina de Sistemas Distribuídos.
 
-## Alunos
+## Aluno
 
-- [Henrique Chaves](https://github.com/henchaves)
 - [Pedro Boechat](https://github.com/pedroboechat)
 
 ## Trabalhos
 
-- [Trabalho 1](https://github.com/pedroboechat/COS470_SistemasDistribuidos/blob/main/Trabalho_1)
-- [Trabalho 2](#)
+- [Trabalho 1](https://github.com/pedroboechat/COS470_SistemasDistribuidos/blob/main/Trabalho_1) (com [Henrique Chaves](https://github.com/henchaves))
+- [Trabalho 2](https://github.com/pedroboechat/COS470_SistemasDistribuidos/blob/main/Trabalho_2)
 - [Trabalho 3](#)
