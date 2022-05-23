@@ -1,0 +1,14 @@
+[package]
+name = "sd_t2_spinlocks"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "spinlocks"
+path = "src/main.rs"
+
+[dependencies]
+clap = "3.1.15"
+nix = "0.24.1"
+rand = "0.8.5"
+tokio = { version = "1.18.2", features = ["full"] }
