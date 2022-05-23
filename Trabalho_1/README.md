@@ -9,8 +9,8 @@
 ## Como executar os programas?
 
 1. Entre na pasta de um programa
-2. Compile o programa com o comando `cargo build`
-3. O executável estará localizado em `./target/debug/<EXECUTÁVEL>`
+2. Compile o programa com o comando `cargo build --release`
+3. O executável estará localizado em `./target/release/<EXECUTÁVEL>`
 
 ## Ajuda da linha de comando
 
