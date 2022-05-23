@@ -15,7 +15,7 @@ impl Lock {
     pub fn acquire(&self) {
         while self.held.swap(
             true, 
-            Ordering::Relaxed
+            Ordering::Acquire
         ) {};
     }
     
@@ -23,7 +23,7 @@ impl Lock {
     pub fn release(&self) {
         self.held.store(
             false,
-            Ordering::Relaxed
+            Ordering::Release
         );
     }
 }
