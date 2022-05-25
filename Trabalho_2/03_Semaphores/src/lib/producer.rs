@@ -6,6 +6,10 @@ use rand::{thread_rng, Rng};
 use tokio::spawn;
 use tokio::task::JoinHandle;
 
+/// Create a producer
+/// ## Arguments
+/// * `threads` - Amount of producer threads.
+/// * `shared_memory` - A mutex of shared memory.
 pub async fn create(
     threads: usize,
     shared_memory:  Arc<Mutex<Vec<i32>>>
@@ -39,7 +43,6 @@ pub async fn create(
                     let free_index = guard.iter().position(|&i| i == 0);
                     match free_index {
                         Some(free_index) => {
-                            // println!("{:?} - Free >> {}", guard, free_index);
                             guard[free_index] = randint;
                         },
                         None => ()

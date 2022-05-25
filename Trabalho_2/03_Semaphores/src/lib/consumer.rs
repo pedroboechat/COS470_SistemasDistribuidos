@@ -6,11 +6,15 @@ use tokio::task::JoinHandle;
 
 use crate::lib::prime::is_prime;
 
+/// Create a consumer
+/// ## Arguments
+/// * `threads` - Amount of consumer threads.
+/// * `shared_memory` - A mutex of shared memory.
 pub async fn create(
     threads: usize,
     shared_memory:  Arc<Mutex<Vec<i32>>>
 ) {
-    // Vector to store producer thread handles
+    // Vector to store consumer thread handles
     let mut handles: Vec<JoinHandle<()>> = Vec::with_capacity(threads);
     
     for _ in 0..threads {
@@ -52,7 +56,7 @@ pub async fn create(
         );
     }
 
-    // For-loop through all the producer thread handles
+    // For-loop through all the consumer thread handles
     for handle in handles {
         // Awaits for the thread to finish running
         handle.await.unwrap();
