@@ -1,4 +1,4 @@
-# Trabalho 1
+# Trabalho 2
 
 ## Tech Stack
 
@@ -14,11 +14,11 @@
 
 ## Ajuda da linha de comando
 
-### 2) [Spinlocks](https://github.com/pedroboechat/COS470_SistemasDistribuidos/tree/main/Trabalho_1/02_Spinlocks) (executável: `spinlocks`)
+### 2) [Spinlocks](https://github.com/pedroboechat/COS470_SistemasDistribuidos/tree/main/Trabalho_2/02_Spinlocks) (executável: `spinlocks`)
 
 ![spinlocks](../assets/T2/spinlocks_help.png)
 
-### 3) [Semáforos](https://github.com/pedroboechat/COS470_SistemasDistribuidos/tree/main/Trabalho_1/03_Pipes) (executável: `semaphores`)
+### 3) [Semáforos](https://github.com/pedroboechat/COS470_SistemasDistribuidos/tree/main/Trabalho_2/03_Semaphores) (executável: `semaphores`)
 
 ![semaphores](../assets/T2/semaphores_help.png)
 
