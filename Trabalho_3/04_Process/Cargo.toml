@@ -1,0 +1,15 @@
+[package]
+name = "sd_t3_process"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "process"
+path = "src/main.rs"
+
+[dependencies]
+clap = "3.1.15"
+dotenv = "0.15.0"
+log = "0.4.17"
+log4rs = "1.1.1"
+tokio = { version = "1.18.2", features = ["full"] }
