@@ -10,9 +10,8 @@ use crate::lib::queue::Queue;
 use crate::lib::messages::*;
 
 fn handler(mut stream: TcpStream, thread_queue: Arc<Mutex<Queue>>) {
-    // Deactivating read and write timeout
+    // Deactivating read timeout
     let _ = stream.set_read_timeout(None);
-    let _ = stream.set_write_timeout(None);
 
     // Loop until stream shutdown
     loop {
