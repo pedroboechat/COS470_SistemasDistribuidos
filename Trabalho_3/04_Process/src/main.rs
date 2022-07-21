@@ -1,4 +1,6 @@
 use std::str::FromStr;
+use std::path::PathBuf;
+use std::env::current_exe;
 
 use clap::{Command, Arg};
 use dotenv;
@@ -9,7 +11,14 @@ use crate::lib::{orchestrator, logger};
 
 #[tokio::main(flavor="multi_thread")]
 async fn main() {
-    _ = match dotenv::from_filename("./bindings.conf") {
+    let mut conf_path: PathBuf = current_exe().unwrap();
+    conf_path.pop();
+    conf_path.pop();
+    conf_path.pop();
+    conf_path.push("bindings");
+    conf_path.set_extension("conf");
+
+    _ = match dotenv::from_path(conf_path) {
         Ok(value) => value,
         Err(error) => panic!(
             "Couldn't read binding configuration: {:?}",
