@@ -22,7 +22,10 @@ pub async fn create(
     // Create TcpStream with coordinator socket
     let mut stream = match TcpStream::connect(address.as_str()) {
         Ok(value) => value,
-        Err(error) => panic!("Unable to bind into {}: {:?}", address.as_str(), error),
+        Err(error) => {
+            info!("Unable to bind into {}: {:?}", address.as_str(), error);
+            panic!("Unable to bind into {}: {:?}", address.as_str(), error)
+        },
     };
 
     // Create Request Message
@@ -50,13 +53,19 @@ pub async fn create(
         // Write Request Message to stream
         let _w_rq = match stream.write(&request_write_buffer) {
             Ok(value) => value,
-            Err(error) => panic!("Unable to write into socket: {:?}", error),
+            Err(error) => {
+                info!("Unable to write into socket: {:?}", error);
+                panic!("Unable to write into socket: {:?}", error)
+            },
         };
 
         // Read Grant Message from stream
         let _r = match stream.read(&mut read_buffer[..]) {
             Ok(value) => value,
-            Err(error) => panic!("Unable to read from socket: {:?}", error),
+            Err(error) => {
+                info!("Unable to read from socket: {:?}", error);
+                panic!("Unable to read from socket: {:?}", error)
+            },
         };
 
         // Convert Buffer to Message raw string
@@ -67,8 +76,14 @@ pub async fn create(
 
         // Check if Grant
         match message.message_type {
-            MessageType::Request => panic!("Process can't receive Request Message"),
-            MessageType::Release => panic!("Process can't receive Release Message"),
+            MessageType::Request => {
+                info!("Process can't receive Request Message");
+                panic!("Process can't receive Request Message")
+            },
+            MessageType::Release => {
+                info!("Process can't receive Release Message");
+                panic!("Process can't receive Release Message")
+            },
             MessageType::Grant => ()
         }
 
@@ -78,7 +93,10 @@ pub async fn create(
         // Write Release Message to stream
         let _w_rl = match stream.write(&release_write_buffer) {
             Ok(value) => value,
-            Err(error) => panic!("Unable to write into socket: {:?}", error),
+            Err(error) => {
+                info!("Unable to write into socket: {:?}", error);
+                panic!("Unable to write into socket: {:?}", error)
+            },
         };
 
         // Sleep for a while

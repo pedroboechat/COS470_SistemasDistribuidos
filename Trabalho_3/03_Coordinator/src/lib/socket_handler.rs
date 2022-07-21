@@ -29,7 +29,10 @@ fn handler(mut stream: TcpStream, thread_queue: Arc<Mutex<Queue>>) {
                     value
                 }
             },
-            Err(error) => panic!("Unable to read from socket: {:?}", error),
+            Err(error) => {
+                info!("Unable to read from socket: {:?}", error);
+                panic!("Unable to read from socket: {:?}", error)
+            },
         };
 
         // Convert Buffer to Message raw string
@@ -79,11 +82,18 @@ pub async fn create(
     // Create and bind listener
     let listener = match TcpListener::bind(address.as_str()) {
         Ok(value) => value,
-        Err(error) => panic!(
-            "Unable to bind into {}: {:?}",
-            address.as_str(),
-            error
-        ),
+        Err(error) => {
+            info!(
+                "Unable to bind into {}: {:?}",
+                address.as_str(),
+                error
+            );
+            panic!(
+                "Unable to bind into {}: {:?}",
+                address.as_str(),
+                error
+            )
+        },
     };
 
     // Listen for incoming streams
@@ -93,10 +103,16 @@ pub async fn create(
                 let thread_queue: Arc<Mutex<Queue>> = queue.clone();
                 spawn(async move { handler(stream, thread_queue) } )
             },
-            Err(error) => panic!(
-                "Unable to set listener to accept connections: {:?}",
-                error
-            ),
+            Err(error) => {
+                info!(
+                    "Unable to set listener to accept connections: {:?}",
+                    error
+                );
+                panic!(
+                    "Unable to set listener to accept connections: {:?}",
+                    error
+                )
+            },
         };
     }
 }

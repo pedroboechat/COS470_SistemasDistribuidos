@@ -62,7 +62,10 @@ pub async fn create(
                                 guard.grant = true;
                                 value
                             },
-                            Err(error) => panic!("Unable to write into socket: {:?}", error),
+                            Err(error) => {
+                                info!("Unable to write into socket: {:?}", error);
+                                panic!("Unable to write into socket: {:?}", error)
+                            },
                         };
                     },
                     MessageType::Release => (), // Handled at socket handler
