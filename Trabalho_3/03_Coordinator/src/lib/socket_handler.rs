@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex, MutexGuard};
 
 use log::info;
 use tokio::spawn;
+use tokio::task::JoinHandle;
 
 use crate::lib::queue::Queue;
 use crate::lib::messages::*;
@@ -95,12 +96,17 @@ pub async fn create(
         },
     };
 
+    // Vector to store producer thread handles
+    let mut handles: Vec<JoinHandle<()>> = Vec::new();
+
     // Listen for incoming streams
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
                 let thread_queue: Arc<Mutex<Queue>> = queue.clone();
-                spawn(async move { handler(stream, thread_queue) } )
+                handles.push(
+                    spawn(async move { handler(stream, thread_queue) } )
+                );
             },
             Err(error) => {
                 info!(
@@ -113,5 +119,11 @@ pub async fn create(
                 )
             },
         };
+    }
+
+    // For-loop through all the producer thread handles
+    for handle in handles {
+        // Awaits for the thread to finish running
+        handle.await.unwrap();
     }
 }
